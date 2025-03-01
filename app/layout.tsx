@@ -15,9 +15,18 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata = {
-  title: "ماشین حساب فرمول",
-  description: "برنامه محاسبه فرمول‌های مهندسی",
   manifest: "/manifest.json",
+  applicationName: "ماشین حساب فرمول",
+  title: {
+    default: "ماشین حساب فرمول",
+    template: "%s | ماشین حساب فرمول",
+  },
+  description: "برنامه محاسبه فرمول‌های مهندسی",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "ماشین حساب فرمول",
+  },
 };
 
 export default function RootLayout({

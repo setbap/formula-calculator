@@ -60,7 +60,8 @@
     "zod": "^3.24.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "next-pwa": "latest"
+    "serwist": "latest",
+    "@serwist/next": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",

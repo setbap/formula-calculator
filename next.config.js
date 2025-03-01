@@ -1,3 +1,17 @@
+
+// @ts-check
+import withSerwistInit from "@serwist/next";
+
+const revision = crypto.randomUUID();
+
+const withSerwist = withSerwistInit({
+  cacheOnNavigation: true,
+  swSrc: "app/sw.ts",
+  swDest: "public/sw.js",
+  additionalPrecacheEntries: [{ url: "/~offline", revision }],
+});
+
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -14,11 +28,5 @@ const nextConfig = {
   },
 };
 
-const withPWA = require("next-pwa")({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === "development",
-});
 
-module.exports = withPWA(nextConfig);
+export default withSerwist(nextConfig);
