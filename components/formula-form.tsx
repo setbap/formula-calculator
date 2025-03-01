@@ -59,7 +59,7 @@ export function FormulaForm({ formula }: FormulaFormProps) {
 
   useEffect(() => {
     calculateResult();
-  }, [values, formula]);
+  }, [values, formula, count]);
 
   const calculateResult = () => {
     const calculatedResult = formula.calculate(values) * count;
