@@ -1,8 +1,64 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Moon, Sun, Monitor } from "lucide-react";
+
+// Theme Switcher Component
+export const ThemeSwitcher = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <div className="flex items-center h-16 justify-between w-full p-4 border-t border-border">
+      <span className="text-sm font-medium">تم</span>
+      <div className="flex gap-1">
+        <button
+          onClick={() => setTheme("light")}
+          className={`p-2 rounded-md ${
+            theme === "light"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted"
+          }`}
+          aria-label="حالت روشن"
+        >
+          <Sun size={16} />
+        </button>
+        <button
+          onClick={() => setTheme("dark")}
+          className={`p-2 rounded-md ${
+            theme === "dark"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted"
+          }`}
+          aria-label="حالت تاریک"
+        >
+          <Moon size={16} />
+        </button>
+        <button
+          onClick={() => setTheme("system")}
+          className={`p-2 rounded-md ${
+            theme === "system"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted"
+          }`}
+          aria-label="حالت سیستم"
+        >
+          <Monitor size={16} />
+        </button>
+      </div>
+    </div>
+  );
+};
 
 interface ProvidersProps {
   children: ReactNode;

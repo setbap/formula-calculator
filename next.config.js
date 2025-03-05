@@ -8,7 +8,6 @@ const withSerwist = withSerwistInit({
   cacheOnNavigation: true,
   swSrc: "app/sw.ts",
   swDest: "public/sw.js",
-  reloadOnOnline: true,
   include: [/\.(js|css|json)$/],
   additionalPrecacheEntries: [{ url: "/~offline", revision }],
 });
@@ -17,10 +16,10 @@ const withSerwist = withSerwistInit({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: "export", // Add static export
-  trailingSlash: true, // Add trailing slash for better compatibility
+  output: "export",
+  trailingSlash: true,
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
   typescript: {
     ignoreBuildErrors: true,

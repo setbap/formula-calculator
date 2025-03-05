@@ -11,10 +11,12 @@ import {
   CircleIcon as CircleSquare,
   CornerUpLeft,
   Download,
+  Menu,
   Pipette,
   Square,
   X,
 } from "lucide-react";
+import { ThemeSwitcher } from "@/app/providers";
 
 interface SidebarProps {
   open: boolean;
@@ -92,10 +94,8 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
     <>
       <aside className="hidden md:flex w-72 flex-col border-l bg-background">
         <div className="flex h-14 items-center border-b px-4">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Calculator className="h-6 w-6" />
-            <span>ماشین حساب فرمول</span>
-          </Link>
+          <Menu className="h-6 w-6" />
+          <span>منو</span>
         </div>
         <ScrollArea className="flex-1">
           <nav className="grid gap-1 px-2 py-4">
@@ -127,6 +127,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
             </Button>
           </div>
         )}
+        <ThemeSwitcher />
       </aside>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="right" className="w-72 p-0">
@@ -180,6 +181,8 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
               </Button>
             </div>
           )}
+
+          <ThemeSwitcher />
         </SheetContent>
       </Sheet>
     </>
