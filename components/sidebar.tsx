@@ -67,13 +67,13 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
     {
       id: "rectangular-tube",
       name: "فرمول محاسبه وزنی قوطی تخت",
-      icon: CircleSquare,
+      icon: Pipette,
       path: "/formulas/rectangular-tube",
     },
     {
       id: "square-tube",
       name: "فرمول محاسبه وزنی قوطی مربع",
-      icon: Square,
+      icon: CircleSquare,
       path: "/formulas/square-tube",
     },
     {
@@ -85,7 +85,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
     {
       id: "pipe-profile",
       name: "فرمول محاسبه وزنی لوله و پروفیل",
-      icon: Pipette,
+      icon: Menu,
       path: "/formulas/pipe-profile",
     },
   ];
@@ -94,8 +94,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
     <>
       <aside className="hidden md:flex w-72 flex-col border-l bg-background">
         <div className="flex h-14 items-center border-b px-4">
-          <Menu className="h-6 w-6" />
-          <span>منو</span>
+          <span>فرمول ها</span>
         </div>
         <ScrollArea className="flex-1">
           <nav className="grid gap-1 px-2 py-4">
@@ -138,7 +137,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
               onClick={() => setOpen(false)}
             >
               <Calculator className="h-6 w-6" />
-              <span>ماشین حساب فرمول</span>
+              <span>فرمول‌ها</span>
             </Link>
             <Button
               variant="ghost"
