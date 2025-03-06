@@ -6,8 +6,14 @@
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
   "orientation": "portrait-primary",
+  "form_factor": "wide",
   "display": "standalone",
   "icons": [
+    {
+      "src": "/web-app-manifest-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -19,6 +25,21 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/desktop.png",
+      "sizes": "1280x749",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "حالت دسکتاپ"
+    },
+    {
+      "src": "/mobile.png",
+      "sizes": "750x1458",
+      "type": "image/png",
+      "label": "حالت موبایل"
     }
   ]
 }

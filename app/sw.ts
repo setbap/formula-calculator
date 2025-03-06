@@ -20,6 +20,5 @@ const serwist = new Serwist({
   navigationPreload: true,
   runtimeCaching: defaultCache,
 });
-debugger;
 
 serwist.addEventListeners();

@@ -9,7 +9,7 @@ const withSerwist = withSerwistInit({
   swSrc: "app/sw.ts",
   swDest: "public/sw.js",
   include: [/\.(js|css|json)$/],
-  additionalPrecacheEntries: [{ url: "/~offline", revision }],
+  additionalPrecacheEntries: [{ url: "/*", revision }],
 });
 
 /** @type {import("next").NextConfig} */
