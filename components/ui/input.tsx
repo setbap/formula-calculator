@@ -1,11 +1,42 @@
-import { cn } from "@/lib/utils";
+import { cn, handleInputFocus, handleInputChange } from "@/lib/utils";
 import React from "react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type, onFocus, onChange, onMouseDown, ...props }, ref) => {
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      // Select all text on focus
+      handleInputFocus(e);
+
+      // Call the original onFocus if provided
+      if (onFocus) {
+        onFocus(e);
+      }
+    };
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
+      // Select all text on mouse down (for click events)
+      const target = e.target as HTMLInputElement;
+      if (target === document.activeElement) {
+        // If already focused, select all text
+        setTimeout(() => {
+          target.select();
+        }, 0);
+      }
+
+      // Call the original onMouseDown if provided
+      if (onMouseDown) {
+        onMouseDown(e);
+      }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      // Convert Persian numbers to English and call original onChange
+      handleInputChange(e, onChange);
+    };
+
     return (
       <input
         type={type}
@@ -14,6 +45,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className
         )}
         ref={ref}
+        onFocus={handleFocus}
+        onMouseDown={handleMouseDown}
+        onChange={handleChange}
         {...props}
       />
     );
