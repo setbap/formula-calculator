@@ -81,6 +81,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground font-sans;
   }
@@ -92,14 +93,38 @@
   }
 }
 
+/* Remove duplicate base layer definitions */
 
+@layer utilities {
+  @keyframes spin-slower {
+    from {
+      transform: rotate(0deg);
+    }
 
-@layer base {
-  * {
-    @apply border-border;
+    to {
+      transform: rotate(360deg);
+    }
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .animate-spin-slower {
+    animation: spin-slower 60s linear infinite;
+  }
+
+  @keyframes float-slower {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float-slower {
+    animation: float-slower 10s ease-in-out infinite;
   }
 }
-

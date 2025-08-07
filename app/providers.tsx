@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import { ThemeProvider, useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Sun, Monitor } from "lucide-react";
+import { Toaster } from "@/components/ui/toaster";
 
 // Theme Switcher Component
 export const ThemeSwitcher = () => {
@@ -124,6 +125,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
         </div>
       )}
       {children}
+      <Toaster />
     </ThemeProvider>
   );
 };

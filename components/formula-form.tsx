@@ -27,6 +27,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 
 interface FormulaFormProps {
   formula: FormulaType;
@@ -81,10 +82,19 @@ export function FormulaForm({ formula }: FormulaFormProps) {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto my-6">
+    <Card className="relative mx-auto my-6 max-w-3xl shadow-sm overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(20rem 12rem at 100% -10%, hsl(var(--chart-4) / 0.10), transparent 40%)",
+        }}
+      />
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl">{formula.name}</CardTitle>
+        <div className="flex items-center justify-between gap-2">
+          <div>
+            <CardTitle className="text-2xl">{formula.name}</CardTitle>
+          </div>
           {isMobile ? (
             <Sheet>
               <SheetTrigger asChild>
@@ -141,10 +151,12 @@ export function FormulaForm({ formula }: FormulaFormProps) {
             </Modal>
           )}
         </div>
-        <CardDescription>{formula.formula}</CardDescription>
+        <CardDescription className="text-muted-foreground">
+          {formula.formula}
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {formula.parameters.map((param) => (
             <div key={param.name} className="space-y-2">
               <Label htmlFor={param.name}>{param.label}</Label>
@@ -158,10 +170,12 @@ export function FormulaForm({ formula }: FormulaFormProps) {
                     handleInputChange(param.name, e.target.value)
                   }
                   onBlur={() => handleBlur(param.name)}
-                  className="pl-12"
+                  className="pr-12"
                 />
-                <div className="absolute inset-y-0 left-0 flex items-center px-3 pointer-events-none text-muted-foreground border-l">
-                  {param.unit}
+                <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-muted-foreground border-r">
+                  <span className="text-xs bg-muted rounded px-1 py-0.5">
+                    {param.unit}
+                  </span>
                 </div>
               </div>
             </div>
@@ -183,20 +197,53 @@ export function FormulaForm({ formula }: FormulaFormProps) {
                 )
               }
               onBlur={() => count < 1 && setCount(1)}
-              className="pl-12"
+              className="pr-12"
             />
-            <div className="absolute inset-y-0 left-0 flex items-center px-3 pointer-events-none text-muted-foreground border-l">
-              عدد
+            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-muted-foreground border-r">
+              <span className="text-xs bg-muted rounded px-1 py-0.5">عدد</span>
             </div>
           </div>
         </div>
 
         <div className="pt-4 border-t">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-row gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h3 className="text-lg font-semibold">نتیجه:</h3>
-            <div className="text-xl font-bold">
-              {result.toLocaleString("fa-IR")} کیلوگرم
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-extrabold tracking-tight">
+                {result.toLocaleString("fa-IR")} کیلوگرم
+              </div>
             </div>
+          </div>
+          <div className="flex mt-4 gap-4 flex-row-reverse">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                navigator.clipboard.writeText(String(result));
+                toast({
+                  title: "کپی شد",
+                  description: "نتیجه در کلیپ‌بورد شما کپی شد.",
+                  duration: 2000,
+                });
+              }}
+            >
+              کپی
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setValues(
+                  formula.parameters.reduce((acc, param) => {
+                    acc[param.name] = param.defaultValue || 20;
+                    return acc;
+                  }, {} as Record<string, number>)
+                );
+                setCount(1);
+              }}
+            >
+              ریست
+            </Button>
           </div>
         </div>
       </CardContent>
