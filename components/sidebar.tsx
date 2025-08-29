@@ -14,6 +14,7 @@ import {
   Menu,
   Pipette,
   Square,
+  Triangle,
   X,
 } from "lucide-react";
 import { ThemeSwitcher } from "@/app/providers";
@@ -52,6 +53,12 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
   };
 
   const formulas = [
+    {
+      id: "pythagorean-theorem",
+      name: "فرمول قضیه فیثاغورس",
+      icon: Triangle,
+      path: "/formulas/pythagorean-theorem",
+    },
     {
       id: "steel-sheet",
       name: "فرمول محاسبه وزنی ورق فولادی",

@@ -1,6 +1,37 @@
-import type { FormulaType } from "./types"
+import type { FormulaType } from "./types";
 
 export const formulas: FormulaType[] = [
+  {
+    id: "pythagorean-theorem",
+    name: "فرمول قضیه فیثاغورس",
+    englishName: "Pythagorean Theorem",
+    formula: "a² + b² = c² (که c وتر است)",
+    description:
+      "این فرمول برای محاسبه ضلع سوم مثلث قائم‌الزاویه استفاده می‌شود. با داشتن دو ضلع، ضلع سوم محاسبه می‌شود. اگر یکی از اعداد وارد شده وتر باشد، سیستم به طور خودکار تشخیص می‌دهد.",
+    example: "اگر a=3 و b=4 باشد، c=5 خواهد بود",
+    parameters: [
+      { name: "side1", label: "ضلع اول", unit: "", defaultValue: 3 },
+      { name: "side2", label: "ضلع دوم", unit: "", defaultValue: 4 },
+    ],
+    calculate: (values) => {
+      const { side1, side2 } = values;
+      const a = Math.min(side1, side2);
+      const b = Math.max(side1, side2);
+
+      // Check if the larger value could be the hypotenuse
+      // If a² + b² > b², then b is not the hypotenuse, so we need to find the hypotenuse
+      const aSquared = a * a;
+      const bSquared = b * b;
+
+      if (aSquared + bSquared > bSquared) {
+        // Both are legs, calculate hypotenuse
+        return Math.sqrt(aSquared + bSquared);
+      } else {
+        // The larger value is the hypotenuse, calculate the missing leg
+        return Math.sqrt(bSquared - aSquared);
+      }
+    },
+  },
   {
     id: "steel-sheet",
     name: "فرمول محاسبه وزنی ورق فولادی",
@@ -15,7 +46,7 @@ export const formulas: FormulaType[] = [
       { name: "thickness", label: "ضخامت", unit: "mm", defaultValue: 25 },
     ],
     calculate: (values) => {
-      return values.length * values.width * (values.thickness) * 7.85
+      return values.length * values.width * values.thickness * 7.85;
     },
   },
   {
@@ -31,7 +62,7 @@ export const formulas: FormulaType[] = [
       { name: "length", label: "طول", unit: "m", defaultValue: 6 },
     ],
     calculate: (values) => {
-      return values.diameter * values.diameter * values.length * 0.00617
+      return values.diameter * values.diameter * values.length * 0.00617;
     },
   },
   {
@@ -49,7 +80,13 @@ export const formulas: FormulaType[] = [
       { name: "tubeLength", label: "طول قوطی", unit: "m", defaultValue: 6 },
     ],
     calculate: (values) => {
-      return (values.length + values.width) * 2 * (values.thickness ) * values.tubeLength * 0.00785
+      return (
+        (values.length + values.width) *
+        2 *
+        values.thickness *
+        values.tubeLength *
+        0.00785
+      );
     },
   },
   {
@@ -66,7 +103,7 @@ export const formulas: FormulaType[] = [
       { name: "length", label: "طول", unit: "m", defaultValue: 6 },
     ],
     calculate: (values) => {
-      return values.width * 4 * (values.thickness ) * values.length * 0.00785
+      return values.width * 4 * values.thickness * values.length * 0.00785;
     },
   },
   {
@@ -83,7 +120,12 @@ export const formulas: FormulaType[] = [
       { name: "length", label: "طول", unit: "m", defaultValue: 6 },
     ],
     calculate: (values) => {
-      return (((values.width * 2 - values.thickness) * values.thickness)) * values.length * 0.00785
+      return (
+        (values.width * 2 - values.thickness) *
+        values.thickness *
+        values.length *
+        0.00785
+      );
     },
   },
   {
@@ -100,12 +142,16 @@ export const formulas: FormulaType[] = [
       { name: "length", label: "طول", unit: "m", defaultValue: 6 },
     ],
     calculate: (values) => {
-      return (values.diameter - values.thickness) * (values.thickness) * values.length * 0.02466
+      return (
+        (values.diameter - values.thickness) *
+        values.thickness *
+        values.length *
+        0.02466
+      );
     },
   },
-]
+];
 
 export function getFormulaById(id: string): FormulaType | undefined {
-  return formulas.find((formula) => formula.id === id)
+  return formulas.find((formula) => formula.id === id);
 }
-
